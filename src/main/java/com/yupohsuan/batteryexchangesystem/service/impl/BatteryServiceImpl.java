@@ -22,4 +22,14 @@ public class BatteryServiceImpl implements BatteryService {
     public Integer createBattery(BatteryRequest batteryRequest) {
         return batteryDao.createBattery(batteryRequest);
     }
+
+    @Override
+    public void updateBattery(Integer batteryId,BatteryRequest batteryRequest) {
+        batteryDao.updateBattery(batteryId, batteryRequest);
+    }
+
+    @Override
+    public void deleteBattery(Integer batteryId) {
+        batteryDao.deleteBattery(batteryId);
+    }
 }

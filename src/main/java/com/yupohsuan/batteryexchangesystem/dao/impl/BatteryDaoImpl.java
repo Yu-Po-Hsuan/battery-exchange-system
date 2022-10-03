@@ -62,4 +62,32 @@ public class BatteryDaoImpl implements BatteryDao {
 
         return BatteryId;
     }
+
+    @Override
+    public void updateBattery(Integer batteryId, BatteryRequest batteryRequest) {
+        String sql = "UPDATE battery SET longitude = :longitude, latitude = :latitude, battery_level = :batteryLevel, member_id = :memberId, " +
+                "last_modified_date = :lastModifiedDate WHERE battery_id = :batteryId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("batteryId",batteryId);
+
+        map.put("longitude", batteryRequest.getLongitude());
+        map.put("latitude",batteryRequest.getLatitude());
+        map.put("batteryLevel",batteryRequest.getBatteryLevel());
+        map.put("memberId",batteryRequest.getMemberId());
+
+        map.put("lastModifiedDate",new Date());
+
+        namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public void deleteBattery(Integer batteryId) {
+        String sql = "DELETE FROM battery WHERE battery_id = :batteryId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("batteryId", batteryId);
+
+        namedParameterJdbcTemplate.update(sql,map);
+    }
 }

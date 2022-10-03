@@ -31,4 +31,27 @@ public class BatteryController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(battery);
     }
+
+    @PutMapping("/batteries/{batteryId}")
+    public ResponseEntity<Battery> updateBattery(@PathVariable Integer batteryId,
+                                                 @RequestBody @Valid BatteryRequest batteryRequest) {
+        Battery battery = batteryService.getBatteryById(batteryId);
+
+        if (battery == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }else {
+            batteryService.updateBattery(batteryId, batteryRequest);
+
+            Battery updatedBattery = batteryService.getBatteryById(batteryId);
+
+            return ResponseEntity.status(HttpStatus.OK).body(updatedBattery);
+        }
+    }
+
+    @DeleteMapping("/batteries/{batteryId}")
+    public ResponseEntity<?> deleteBattery(@PathVariable Integer batteryId) {
+        batteryService.deleteBattery(batteryId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
