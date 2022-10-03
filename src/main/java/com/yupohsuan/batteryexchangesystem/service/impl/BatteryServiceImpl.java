@@ -7,11 +7,23 @@ import com.yupohsuan.batteryexchangesystem.service.BatteryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class BatteryServiceImpl implements BatteryService {
 
     @Autowired
     private BatteryDao batteryDao;
+
+    @Override
+    public Integer countBatteries(Integer batteryLevel) {
+        return batteryDao.countBatteries(batteryLevel);
+    }
+
+    @Override
+    public List<Battery> getBatteries(Integer batteryLevel) {
+        return batteryDao.getBatteries(batteryLevel);
+    }
 
     @Override
     public Battery getBatteryById(Integer batteryId) {

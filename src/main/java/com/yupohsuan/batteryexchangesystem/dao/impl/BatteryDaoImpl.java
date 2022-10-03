@@ -23,6 +23,41 @@ public class BatteryDaoImpl implements BatteryDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
+    public Integer countBatteries(Integer batteryLevel) {
+        String sql = "SELECT count(*) FROM battery WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        if (batteryLevel != null) {
+            sql = sql + " AND battery_level >= :batteryLevel";
+            map.put("batteryLevel",batteryLevel);
+        }
+
+        return namedParameterJdbcTemplate.queryForObject(sql,map,Integer.class);
+    }
+
+    @Override
+    public List<Battery> getBatteries(Integer batteryLevel) {
+        String sql = "SELECT battery_id, longitude, latitude, battery_level, member_id, created_date, last_modified_date " +
+                "FROM battery WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        if (batteryLevel != null) {
+            sql = sql + " AND battery_level >= :batteryLevel";
+            map.put("batteryLevel",batteryLevel);
+        }
+
+        List<Battery> batteryList = namedParameterJdbcTemplate.query(sql, map, new BatteryRowMapper());
+
+        if (batteryList.size() > 0) {
+            return batteryList;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
     public Battery getBatteryById(Integer batteryId) {
         String sql = "SELECT battery_id, longitude, latitude, battery_level, member_id, created_date, last_modified_date " +
                 "FROM battery WHERE battery_id = :batteryId";
