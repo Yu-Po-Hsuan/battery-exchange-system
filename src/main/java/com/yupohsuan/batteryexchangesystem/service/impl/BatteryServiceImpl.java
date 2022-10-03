@@ -1,6 +1,7 @@
 package com.yupohsuan.batteryexchangesystem.service.impl;
 
 import com.yupohsuan.batteryexchangesystem.dao.BatteryDao;
+import com.yupohsuan.batteryexchangesystem.dto.BatteryRequest;
 import com.yupohsuan.batteryexchangesystem.model.Battery;
 import com.yupohsuan.batteryexchangesystem.service.BatteryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,10 @@ public class BatteryServiceImpl implements BatteryService {
     @Override
     public Battery getBatteryById(Integer batteryId) {
         return batteryDao.getBatteryById(batteryId);
+    }
+
+    @Override
+    public Integer createBattery(BatteryRequest batteryRequest) {
+        return batteryDao.createBattery(batteryRequest);
     }
 }
