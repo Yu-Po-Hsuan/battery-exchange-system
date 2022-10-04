@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 @Component
@@ -30,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Integer register(MemberRegisterRequest memberRegisterRequest) {
-
+        //檢查註冊 email
         Member member = memberDao.getMemberByEmail(memberRegisterRequest.getEmail());
 
         if (member != null) {
@@ -38,6 +39,11 @@ public class MemberServiceImpl implements MemberService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
+        //使用 md5 生成密碼的雜湊值
+        String hashedPassword = DigestUtils.md5DigestAsHex(memberRegisterRequest.getPassword().getBytes());
+        memberRegisterRequest.setPassword(hashedPassword);
+
+        //創建帳號
         return memberDao.createMember(memberRegisterRequest);
     }
 
@@ -45,12 +51,17 @@ public class MemberServiceImpl implements MemberService {
     public Member login(MemberLoginRequest memberLoginRequest) {
         Member member = memberDao.getMemberByEmail(memberLoginRequest.getEmail());
 
+        //檢查 member 是否存在
         if (member == null) {
             log.warn("該 email {} 尚未註冊", memberLoginRequest.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        if (member.getPassword().equals(memberLoginRequest.getPassword())) {
+        //使用 md5 生成密碼的雜湊值
+        String hashedPassword = DigestUtils.md5DigestAsHex(memberLoginRequest.getPassword().getBytes());
+
+        //比較密碼
+        if (member.getPassword().equals(hashedPassword)) {
             return member;
         } else {
             log.warn("該 email {} 密碼輸入不正確", memberLoginRequest.getEmail());
