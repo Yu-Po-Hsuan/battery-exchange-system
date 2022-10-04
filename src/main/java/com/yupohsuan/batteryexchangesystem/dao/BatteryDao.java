@@ -16,5 +16,7 @@ public interface BatteryDao {
 
     void updateBattery(Integer batteryId, BatteryRequest batteryRequest);
 
+    void updateBatteryHolder(Integer batteryId, Integer memberId);
+
     void deleteBattery(Integer batteryId);
 }

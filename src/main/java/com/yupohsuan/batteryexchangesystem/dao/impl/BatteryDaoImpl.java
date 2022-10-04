@@ -117,6 +117,20 @@ public class BatteryDaoImpl implements BatteryDao {
     }
 
     @Override
+    public void updateBatteryHolder(Integer batteryId, Integer memberId) {
+        String sql = "UPDATE battery SET member_id = :memberId, last_modified_date = :lastModifiedDate " +
+                "WHERE battery_id = :batteryId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("batteryId",batteryId);
+        map.put("memberId",memberId);
+
+        map.put("lastModifiedDate",new Date());
+
+        namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
     public void deleteBattery(Integer batteryId) {
         String sql = "DELETE FROM battery WHERE battery_id = :batteryId";
 
