@@ -3,6 +3,8 @@ package com.yupohsuan.batteryexchangesystem.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class BatteryRequest {
@@ -14,6 +16,8 @@ public class BatteryRequest {
     private String latitude;
 
     @NotNull
+    @Max(100)
+    @Min(0)
     @JsonProperty("battery_level")
     private Integer batteryLevel;
 

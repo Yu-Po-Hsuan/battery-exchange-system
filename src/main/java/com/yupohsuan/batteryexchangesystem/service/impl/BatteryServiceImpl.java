@@ -43,6 +43,13 @@ public class BatteryServiceImpl implements BatteryService {
 
     @Override
     public Integer createBattery(BatteryRequest batteryRequest) {
+        Member member = memberDao.getMemberById(batteryRequest.getMemberId());
+
+        if (member == null) {
+            log.warn("member_id 為 {} 的帳號不存在", batteryRequest.getMemberId());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
         return batteryDao.createBattery(batteryRequest);
     }
 
