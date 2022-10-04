@@ -1,6 +1,7 @@
 package com.yupohsuan.batteryexchangesystem.service.impl;
 
 import com.yupohsuan.batteryexchangesystem.dao.MemberDao;
+import com.yupohsuan.batteryexchangesystem.dto.MemberLoginRequest;
 import com.yupohsuan.batteryexchangesystem.dto.MemberRegisterRequest;
 import com.yupohsuan.batteryexchangesystem.model.Member;
 import com.yupohsuan.batteryexchangesystem.service.MemberService;
@@ -38,5 +39,22 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return memberDao.createMember(memberRegisterRequest);
+    }
+
+    @Override
+    public Member login(MemberLoginRequest memberLoginRequest) {
+        Member member = memberDao.getMemberByEmail(memberLoginRequest.getEmail());
+
+        if (member == null) {
+            log.warn("該 email {} 尚未註冊", memberLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (member.getPassword().equals(memberLoginRequest.getPassword())) {
+            return member;
+        } else {
+            log.warn("該 email {} 密碼輸入不正確", memberLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }
