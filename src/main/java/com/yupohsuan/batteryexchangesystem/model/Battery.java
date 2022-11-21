@@ -4,10 +4,7 @@ import java.util.Date;
 
 public class Battery {
     private Integer batteryId;
-    private String longitude;
-    private String latitude;
     private Integer batteyLevel;
-    private Integer memberId;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -19,36 +16,12 @@ public class Battery {
         this.batteryId = batteryId;
     }
 
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
     public Integer getBatteyLevel() {
         return batteyLevel;
     }
 
     public void setBatteyLevel(Integer batteyLevel) {
         this.batteyLevel = batteyLevel;
-    }
-
-    public Integer getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Integer memberId) {
-        this.memberId = memberId;
     }
 
     public Date getCreatedDate() {

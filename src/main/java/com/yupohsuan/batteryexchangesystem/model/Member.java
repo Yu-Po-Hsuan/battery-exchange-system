@@ -11,6 +11,8 @@ public class Member {
     @JsonIgnore
     private String password;
 
+    private String phoneNumber;
+
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -36,6 +38,14 @@ public class Member {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Date getCreatedDate() {

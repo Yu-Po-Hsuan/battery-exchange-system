@@ -24,7 +24,7 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public Member getMemberById(Integer memberId) {
-        String sql = "SELECT member_id, email, password, created_date, last_modified_date FROM member " +
+        String sql = "SELECT member_id, email, password, phone_number, created_date, last_modified_date FROM member " +
                 "WHERE member_id = :memberId";
 
         Map<String, Object> map = new HashMap<>();
@@ -42,7 +42,7 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public Member getMemberByEmail(String email) {
-        String sql = "SELECT member_id, email, password, created_date, last_modified_date FROM member " +
+        String sql = "SELECT member_id, email, password, phone_number, created_date, last_modified_date FROM member " +
                 "WHERE email = :email";
 
         Map<String, Object> map = new HashMap<>();
@@ -60,12 +60,13 @@ public class MemberDaoImpl implements MemberDao {
     @Override
     public Integer createMember(MemberRegisterRequest memberRegisterRequest) {
 
-        String sql = "INSERT INTO member (email, password, created_date, last_modified_date) " +
-                "VALUES (:email, :password, :createdDate, :lastModifiedDate);";
+        String sql = "INSERT INTO member (email, password, phone_number, created_date, last_modified_date) " +
+                "VALUES (:email, :password, :phoneNumber, :createdDate, :lastModifiedDate);";
 
         Map<String, Object> map = new HashMap<>();
         map.put("email", memberRegisterRequest.getEmail());
         map.put("password", memberRegisterRequest.getPassword());
+        map.put("phoneNumber",memberRegisterRequest.getPhoneNumber());
 
         map.put("createdDate", new Date());
         map.put("lastModifiedDate", new Date());

@@ -1,7 +1,6 @@
 package com.yupohsuan.batteryexchangesystem.dao.impl;
 
 import com.yupohsuan.batteryexchangesystem.dao.BatteryDao;
-import com.yupohsuan.batteryexchangesystem.dto.BatteryRequest;
 import com.yupohsuan.batteryexchangesystem.model.Battery;
 import com.yupohsuan.batteryexchangesystem.rowmapper.BatteryRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,44 +21,10 @@ public class BatteryDaoImpl implements BatteryDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Override
-    public Integer countBatteries(Integer batteryLevel) {
-        String sql = "SELECT count(*) FROM battery WHERE 1=1";
-
-        Map<String, Object> map = new HashMap<>();
-
-        if (batteryLevel != null) {
-            sql = sql + " AND battery_level >= :batteryLevel";
-            map.put("batteryLevel",batteryLevel);
-        }
-
-        return namedParameterJdbcTemplate.queryForObject(sql,map,Integer.class);
-    }
-
-    @Override
-    public List<Battery> getBatteries(Integer batteryLevel) {
-        String sql = "SELECT battery_id, longitude, latitude, battery_level, member_id, created_date, last_modified_date " +
-                "FROM battery WHERE 1=1";
-
-        Map<String, Object> map = new HashMap<>();
-
-        if (batteryLevel != null) {
-            sql = sql + " AND battery_level >= :batteryLevel";
-            map.put("batteryLevel",batteryLevel);
-        }
-
-        List<Battery> batteryList = namedParameterJdbcTemplate.query(sql, map, new BatteryRowMapper());
-
-        if (batteryList.size() > 0) {
-            return batteryList;
-        }else {
-            return null;
-        }
-    }
 
     @Override
     public Battery getBatteryById(Integer batteryId) {
-        String sql = "SELECT battery_id, longitude, latitude, battery_level, member_id, created_date, last_modified_date " +
+        String sql = "SELECT battery_id, battery_level, created_date, last_modified_date " +
                 "FROM battery WHERE battery_id = :batteryId";
 
         Map<String, Object> map = new HashMap<>();
@@ -75,15 +40,12 @@ public class BatteryDaoImpl implements BatteryDao {
     }
 
     @Override
-    public Integer createBattery(BatteryRequest batteryRequest) {
-        String sql = "INSERT INTO battery (longitude, latitude, battery_level, member_id, created_date, last_modified_date) " +
-                "VALUES (:longitude, :latitude, :batteryLevel, :memberId, :createdDate, :lastModifiedDate)";
+    public Integer createBattery(Integer batteryLevel) {
+        String sql = "INSERT INTO battery (battery_level, created_date, last_modified_date) " +
+                "VALUES (:batteryLevel,:createdDate, :lastModifiedDate)";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("longitude", batteryRequest.getLongitude());
-        map.put("latitude", batteryRequest.getLatitude());
-        map.put("batteryLevel", batteryRequest.getBatteryLevel());
-        map.put("memberId",batteryRequest.getMemberId());
+        map.put("batteryLevel", batteryLevel);
 
         Date now = new Date();
         map.put("createdDate", now);
@@ -99,36 +61,22 @@ public class BatteryDaoImpl implements BatteryDao {
     }
 
     @Override
-    public void updateBattery(Integer batteryId, BatteryRequest batteryRequest) {
-        String sql = "UPDATE battery SET longitude = :longitude, latitude = :latitude, battery_level = :batteryLevel, member_id = :memberId, " +
+    public void updateBattery(Integer batteryId, Integer batteryLevel) {
+        String sql = "UPDATE battery SET battery_level = :batteryLevel, " +
                 "last_modified_date = :lastModifiedDate WHERE battery_id = :batteryId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("batteryId",batteryId);
 
-        map.put("longitude", batteryRequest.getLongitude());
-        map.put("latitude",batteryRequest.getLatitude());
-        map.put("batteryLevel",batteryRequest.getBatteryLevel());
-        map.put("memberId",batteryRequest.getMemberId());
+
+        map.put("batteryLevel",batteryLevel);
 
         map.put("lastModifiedDate",new Date());
 
         namedParameterJdbcTemplate.update(sql,map);
     }
 
-    @Override
-    public void updateBatteryHolder(Integer batteryId, Integer memberId) {
-        String sql = "UPDATE battery SET member_id = :memberId, last_modified_date = :lastModifiedDate " +
-                "WHERE battery_id = :batteryId";
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("batteryId",batteryId);
-        map.put("memberId",memberId);
-
-        map.put("lastModifiedDate",new Date());
-
-        namedParameterJdbcTemplate.update(sql,map);
-    }
 
     @Override
     public void deleteBattery(Integer batteryId) {

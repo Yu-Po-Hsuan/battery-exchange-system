@@ -1,5 +1,7 @@
 package com.yupohsuan.batteryexchangesystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -11,6 +13,10 @@ public class MemberRegisterRequest {
 
     @NotBlank
     private String password;
+
+    @NotBlank
+    @JsonProperty("phone_number")
+    private String phoneNumber;
 
     public String getEmail() {
         return email;
@@ -26,5 +32,13 @@ public class MemberRegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
