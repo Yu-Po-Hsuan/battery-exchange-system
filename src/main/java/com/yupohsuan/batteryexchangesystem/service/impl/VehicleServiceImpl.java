@@ -1,6 +1,7 @@
 package com.yupohsuan.batteryexchangesystem.service.impl;
 
 import com.yupohsuan.batteryexchangesystem.dao.VehicleDao;
+import com.yupohsuan.batteryexchangesystem.dto.VehicleLocationRequest;
 import com.yupohsuan.batteryexchangesystem.service.VehicleService;
 import com.yupohsuan.batteryexchangesystem.util.VehiclesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class VehicleServiceImpl implements VehicleService {
 
             vehicleDao.updateBatteryId(TargetVehicleId, MyBatteryId);
             vehicleDao.updateBatteryId(MyVehicleId, TargetBatteryId);
+    }
+
+    @Override
+    public void updateLocation(VehicleLocationRequest vehicleLocationRequest) {
+        vehicleDao.updateLocation(vehicleLocationRequest);
     }
 }

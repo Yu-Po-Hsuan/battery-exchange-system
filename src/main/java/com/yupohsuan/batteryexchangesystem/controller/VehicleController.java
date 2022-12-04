@@ -1,6 +1,7 @@
 package com.yupohsuan.batteryexchangesystem.controller;
 
 
+import com.yupohsuan.batteryexchangesystem.dto.VehicleLocationRequest;
 import com.yupohsuan.batteryexchangesystem.service.VehicleService;
 import com.yupohsuan.batteryexchangesystem.util.VehiclesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,11 @@ public class VehicleController {
                                       @RequestParam Integer TargetVehicleId) {
         vehicleService.exchange(MyVehicleId, TargetVehicleId);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PutMapping("/vehicles")
+    public ResponseEntity<?> updateLocation(@RequestBody VehicleLocationRequest vehicleLocationRequest) {
+        vehicleService.updateLocation(vehicleLocationRequest);
+        return ResponseEntity.status((HttpStatus.OK)).build();
     }
 }

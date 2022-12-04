@@ -1,12 +1,14 @@
 package com.yupohsuan.batteryexchangesystem.dao.impl;
 
 import com.yupohsuan.batteryexchangesystem.dao.VehicleDao;
+import com.yupohsuan.batteryexchangesystem.dto.VehicleLocationRequest;
 import com.yupohsuan.batteryexchangesystem.rowmapper.VehiclesResponseRowMapper;
 import com.yupohsuan.batteryexchangesystem.util.VehiclesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,5 +54,20 @@ public class VehicleDaoImpl implements VehicleDao {
         map.put("vehicleId", vehicleId);
 
         namedParameterJdbcTemplate.update(sql,map);
+    }
+
+    @Override
+    public void updateLocation(VehicleLocationRequest vehicleLocationRequest) {
+        String sql = "UPDATE vehicle SET latitude = :latitude, longitude = :longitude," +
+                " last_modified_date = :lastModifiedDate WHERE vehicle_id = :vehicleId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("latitude", vehicleLocationRequest.getLatitude());
+        map.put("longitude", vehicleLocationRequest.getLongitude());
+        map.put("vehicleId", vehicleLocationRequest.getVehicleId());
+
+        map.put("lastModifiedDate", new Date());
+
+        namedParameterJdbcTemplate.update(sql, map);
     }
 }
