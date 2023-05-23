@@ -1,21 +1,11 @@
-package com.yupohsuan.batteryexchangesystem.util;
+package com.yupohsuan.batteryexchangesystem.dto;
 
-public class VehiclesResponse {
-    private Integer vehicleId;
+public class VehicleCreateRequest {
     private String licensePlateNumber;
     private Double latitude;
     private Double longitude;
     private Integer batteryLevel;
-    private String phoneNumber;
-
-
-    public Integer getVehicleId() {
-        return vehicleId;
-    }
-
-    public void setVehicleId(Integer vehicleId) {
-        this.vehicleId = vehicleId;
-    }
+    private Integer memberId;
 
     public String getLicensePlateNumber() {
         return licensePlateNumber;
@@ -49,11 +39,11 @@ public class VehiclesResponse {
         this.batteryLevel = batteryLevel;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public Integer getMemberId() {
+        return memberId;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
     }
 }

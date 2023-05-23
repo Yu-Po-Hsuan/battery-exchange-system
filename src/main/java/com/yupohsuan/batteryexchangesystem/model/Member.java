@@ -1,6 +1,6 @@
 package com.yupohsuan.batteryexchangesystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ public class Member {
     private Integer memberId;
     private String email;
 
-    @JsonIgnore
+//    @JsonIgnore
     private String password;
 
     private String phoneNumber;

@@ -11,8 +11,9 @@ public class VehiclesResponseRowMapper implements RowMapper<VehiclesResponse> {
     public VehiclesResponse mapRow(ResultSet resultSet, int i) throws SQLException {
         VehiclesResponse vehiclesResponse = new VehiclesResponse();
         vehiclesResponse.setVehicleId(resultSet.getInt("vehicle_id"));
-        vehiclesResponse.setLatitude(resultSet.getString("latitude"));
-        vehiclesResponse.setLongitude(resultSet.getString("longitude"));
+        vehiclesResponse.setLicensePlateNumber(resultSet.getString("license_plate_number"));
+        vehiclesResponse.setLatitude(resultSet.getDouble("latitude"));
+        vehiclesResponse.setLongitude(resultSet.getDouble("longitude"));
         vehiclesResponse.setBatteryLevel(resultSet.getInt("battery_level"));
         vehiclesResponse.setPhoneNumber(resultSet.getString("phone_number"));
         return vehiclesResponse;

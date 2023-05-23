@@ -4,9 +4,10 @@ import java.util.Date;
 
 public class Vehicle {
     private Integer vehicleId;
-    private String longitude;
-    private String latitude;
-    private Integer batteryId;
+    private String licensePlateNumber;
+    private Double longitude;
+    private Double latitude;
+    private Integer batteryLevel;
     private Integer memberId;
     private Date createdDate;
     private Date lastModifiedDate;
@@ -19,28 +20,36 @@ public class Vehicle {
         this.vehicleId = vehicleId;
     }
 
-    public String getLongitude() {
+    public String getLicensePlateNumber() {
+        return licensePlateNumber;
+    }
+
+    public void setLicensePlateNumber(String licensePlateNumber) {
+        this.licensePlateNumber = licensePlateNumber;
+    }
+
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getBatteryId() {
-        return batteryId;
+    public Integer getBatteryLevel() {
+        return batteryLevel;
     }
 
-    public void setBatteryId(Integer batteryId) {
-        this.batteryId = batteryId;
+    public void setBatteryLevel(Integer batteryLevel) {
+        this.batteryLevel = batteryLevel;
     }
 
     public Integer getMemberId() {
