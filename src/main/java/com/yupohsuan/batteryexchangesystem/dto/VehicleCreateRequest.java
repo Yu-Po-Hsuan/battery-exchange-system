@@ -4,7 +4,7 @@ public class VehicleCreateRequest {
     private String licensePlateNumber;
     private Double latitude;
     private Double longitude;
-    private Integer batteryLevel;
+    private Float batteryLevel;
     private Integer memberId;
 
     public String getLicensePlateNumber() {
@@ -31,11 +31,11 @@ public class VehicleCreateRequest {
         this.longitude = longitude;
     }
 
-    public Integer getBatteryLevel() {
+    public Float getBatteryLevel() {
         return batteryLevel;
     }
 
-    public void setBatteryLevel(Integer batteryLevel) {
+    public void setBatteryLevel(Float batteryLevel) {
         this.batteryLevel = batteryLevel;
     }
 

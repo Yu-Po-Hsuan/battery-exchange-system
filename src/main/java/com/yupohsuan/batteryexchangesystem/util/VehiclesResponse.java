@@ -5,7 +5,7 @@ public class VehiclesResponse {
     private String licensePlateNumber;
     private Double latitude;
     private Double longitude;
-    private Integer batteryLevel;
+    private Float batteryLevel;
     private String phoneNumber;
 
 
@@ -41,11 +41,11 @@ public class VehiclesResponse {
         this.longitude = longitude;
     }
 
-    public Integer getBatteryLevel() {
+    public Float getBatteryLevel() {
         return batteryLevel;
     }
 
-    public void setBatteryLevel(Integer batteryLevel) {
+    public void setBatteryLevel(Float batteryLevel) {
         this.batteryLevel = batteryLevel;
     }
 

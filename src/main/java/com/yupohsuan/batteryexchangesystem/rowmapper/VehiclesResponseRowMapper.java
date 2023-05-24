@@ -14,7 +14,7 @@ public class VehiclesResponseRowMapper implements RowMapper<VehiclesResponse> {
         vehiclesResponse.setLicensePlateNumber(resultSet.getString("license_plate_number"));
         vehiclesResponse.setLatitude(resultSet.getDouble("latitude"));
         vehiclesResponse.setLongitude(resultSet.getDouble("longitude"));
-        vehiclesResponse.setBatteryLevel(resultSet.getInt("battery_level"));
+        vehiclesResponse.setBatteryLevel(resultSet.getFloat("battery_level"));
         vehiclesResponse.setPhoneNumber(resultSet.getString("phone_number"));
         return vehiclesResponse;
     }

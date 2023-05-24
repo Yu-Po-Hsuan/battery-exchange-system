@@ -7,7 +7,7 @@ public class Vehicle {
     private String licensePlateNumber;
     private Double longitude;
     private Double latitude;
-    private Integer batteryLevel;
+    private Float batteryLevel;
     private Integer memberId;
     private Date createdDate;
     private Date lastModifiedDate;
@@ -44,11 +44,11 @@ public class Vehicle {
         this.latitude = latitude;
     }
 
-    public Integer getBatteryLevel() {
+    public Float getBatteryLevel() {
         return batteryLevel;
     }
 
-    public void setBatteryLevel(Integer batteryLevel) {
+    public void setBatteryLevel(Float batteryLevel) {
         this.batteryLevel = batteryLevel;
     }
 

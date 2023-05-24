@@ -4,7 +4,7 @@ public class VehicleDataRequest {
     private String licensePlateNumber;
     private Double latitude;
     private Double longitude;
-    private Integer batteryLevel;
+    private Float batteryLevel;
 
     public String getLicensePlateNumber() {
         return licensePlateNumber;
@@ -14,14 +14,13 @@ public class VehicleDataRequest {
         this.licensePlateNumber = licensePlateNumber;
     }
 
-    public Integer getBatteryLevel() {
+    public Float getBatteryLevel() {
         return batteryLevel;
     }
 
-    public void setBatteryLevel(Integer batteryLevel) {
+    public void setBatteryLevel(Float batteryLevel) {
         this.batteryLevel = batteryLevel;
     }
-
 
     public Double getLatitude() {
         return latitude;

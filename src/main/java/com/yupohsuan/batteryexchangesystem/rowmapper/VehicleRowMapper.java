@@ -15,7 +15,7 @@ public class VehicleRowMapper implements RowMapper<Vehicle> {
         vehicle.setLicensePlateNumber(resultSet.getString("license_plate_number"));
         vehicle.setLatitude(resultSet.getDouble("latitude"));
         vehicle.setLongitude(resultSet.getDouble("longitude"));
-        vehicle.setBatteryLevel(resultSet.getInt("battery_level"));
+        vehicle.setBatteryLevel(resultSet.getFloat("battery_level"));
         vehicle.setMemberId(resultSet.getInt("member_id"));
         vehicle.setCreatedDate(resultSet.getTimestamp("created_date"));
         vehicle.setLastModifiedDate(resultSet.getTimestamp("last_modified_date"));
